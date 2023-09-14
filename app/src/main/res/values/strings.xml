@@ -5,18 +5,46 @@
     <string name="app_description">Bop It Mobile, Desarrollado por Ulises Muñoz\n\nAplicación que simula el juguete de Bop It, pero usando funcionalidades de dispositivos móviles.</string>
 
 
+    <!-- Botón Información -->
     <string name="AboutTextButton">Información</string>
     <string name="AboutTitle">Información</string>
 
+    <!-- Botón Preferencias -->
     <string name="SettingTextButton">Preferencias</string>
     <string name="SettingTitle">Preferencias</string>
 
+    <!-- Botón Volver al Menu -->
     <string name="BackToMenuTextButton">Volver</string>
     <string name="BackToMenuTitle">Volver</string>
 
+
     <string name="SettingsTitle">Configuraciones</string>
+    <string name="title_activity_preferences">PreferencesActivity</string>
 
+    <!-- Preference Titles -->
+    <string name="UserPreference_header">Preferencias de usuario</string>
+    <string name="GamePreference_header">Preferencias de juego</string>
+    <string name="Administration_header">Administracion general</string>
 
+    <!-- User Preferences -->
+    <string name="username_title">Nombre Usuario</string>
+    <string name="highscore_title">HighScore</string>
+    <string name="HighScore">0</string>
+
+    <!-- Game Preferences -->
+    <string name="theme_title">Tema de la aplicación</string>
+    <string name="volume_title">Nivel de volumen de la aplicación</string>
+    <string name="fontsize_title">Tamaño de letra</string>
+
+    <!-- Administration Preference -->
+    <string name="restart_preference">Reiniciar preferencias</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
 
 </resources>

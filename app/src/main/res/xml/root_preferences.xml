@@ -1,0 +1,58 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/UserPreference_header">
+
+        <EditTextPreference
+            app:key="Usename"
+            app:title="@string/username_title"
+            app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+            app:defaultValue="@string/HighScore"
+            app:key="HighScore"
+            app:selectable="false"
+            app:title="@string/highscore_title"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/GamePreference_header">
+        <ListPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="1"
+            android:title="@string/theme_title"
+            app:entries="@array/theme_entreis"
+            app:entryValues="@array/theme_values"
+            app:key="theme" />
+        <ListPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="1"
+            android:title="@string/volume_title"
+            app:entries="@array/volume_entreis"
+            app:entryValues="@array/volume_values"
+            app:key="volume" />
+        <ListPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="1"
+            android:title="@string/fontsize_title"
+            app:entries="@array/fontsize_entreis"
+            app:entryValues="@array/fontsize_values"
+            app:key="fontsize" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="@string/Administration_header">
+
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="false"
+            android:title="@string/GamePreference_header" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

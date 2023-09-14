@@ -20,4 +20,45 @@
         <item>reply</item>
         <item>reply_all</item>
     </string-array>
+
+
+
+    <string-array name="theme_entreis">
+        <item>Rojo Oscuro</item>
+        <item>Negro</item>
+    </string-array>
+
+    <string-array name="theme_values">
+        <item>DarkRead</item>
+        <item>Black</item>
+    </string-array>
+
+
+    <string-array name="volume_entreis">
+        <item>Nulo</item>
+        <item>Bajo</item>
+        <item>Medio</item>
+        <item>Alto</item>
+        <item>Máximo</item>
+    </string-array>
+
+    <string-array name="volume_values">
+        <item>0</item>
+        <item>25</item>
+        <item>50</item>
+        <item>75</item>
+        <item>100</item>
+    </string-array>
+
+    <string-array name="fontsize_entreis">
+        <item>Pequeño</item>
+        <item>Mediano</item>
+        <item>Grande</item>
+    </string-array>
+
+    <string-array name="fontsize_values">
+        <item>10</item>
+        <item>25</item>
+        <item>50</item>
+    </string-array>
 </resources>

@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         buttonOKSetting.setOnClickListener {
-            val intentSetting = Intent(this, SettingActivity::class.java)
+            val intentSetting = Intent(this, PreferencesActivity::class.java)
             startActivity(intentSetting)
         }
 
