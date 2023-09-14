@@ -3,7 +3,20 @@
     <string name="imageLogo">TODO</string>
     <string name="TextName">Ulises Muñoz\n umunoz21@alumnos.utalca.cl</string>
     <string name="app_description">Bop It Mobile, Desarrollado por Ulises Muñoz\n\nAplicación que simula el juguete de Bop It, pero usando funcionalidades de dispositivos móviles.</string>
-    <string name="AboutTextButton">Info</string>
-    <string name="AboutTitle">Info</string>
+
+
+    <string name="AboutTextButton">Información</string>
+    <string name="AboutTitle">Información</string>
+
+    <string name="SettingTextButton">Preferencias</string>
+    <string name="SettingTitle">Preferencias</string>
+
+    <string name="BackToMenuTextButton">Volver</string>
+    <string name="BackToMenuTitle">Volver</string>
+
     <string name="SettingsTitle">Configuraciones</string>
+
+
+
+
 </resources>
