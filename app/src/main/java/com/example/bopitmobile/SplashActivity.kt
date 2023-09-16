@@ -9,16 +9,24 @@ import android.util.Log
 import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.view.animation.AnimationUtils
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 
 class SplashActivity : AppCompatActivity() {
 
     val tagLog = "SplashActivity"
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
+
+        val progressBar = findViewById<ProgressBar>(R.id.progressBar)
+
+
 
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val value = sharedPreferences.getString("splash_time", "1000")
