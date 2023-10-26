@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
         val buttonOKAbout = findViewById<Button>(R.id.AboutButton)
 
         val buttonOKSetting = findViewById<Button>(R.id.SettingButton)
-        val buttonSoundPlayer = MediaPlayer.create(this, R.raw.pop)
         themeSoundPlayer = MediaPlayer.create(this, R.raw.theme)
         themeSoundPlayer.start()
 
@@ -30,15 +29,11 @@ class MainActivity : AppCompatActivity() {
 
         // Button click listeners
         buttonOKAbout.setOnClickListener {
-
-            buttonSoundPlayer.start()
             val intentAbout = Intent(this, AboutActivity::class.java)
             startActivity(intentAbout)
         }
 
         buttonOKSetting.setOnClickListener {
-
-            buttonSoundPlayer.start()
             val intentSetting = Intent(this, PreferencesActivity::class.java)
             startActivity(intentSetting)
         }
