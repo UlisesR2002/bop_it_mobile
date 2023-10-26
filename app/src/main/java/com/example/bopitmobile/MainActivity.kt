@@ -17,17 +17,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val buttonOKGame = findViewById<Button>(R.id.PlayButton)
+
         val buttonOKAbout = findViewById<Button>(R.id.AboutButton)
 
         val buttonOKSetting = findViewById<Button>(R.id.SettingButton)
+
         themeSoundPlayer = MediaPlayer.create(this, R.raw.theme)
+        themeSoundPlayer.isLooping = true
+
         themeSoundPlayer.start()
+
 
         playbackParams = themeSoundPlayer.playbackParams
 
 
+        buttonOKGame.setOnClickListener {
+            val intentGame = Intent(this, GameActivity::class.java)
+            startActivity(intentGame)
+        }
 
-        // Button click listeners
         buttonOKAbout.setOnClickListener {
             val intentAbout = Intent(this, AboutActivity::class.java)
             startActivity(intentAbout)
