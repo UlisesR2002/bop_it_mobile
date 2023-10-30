@@ -19,16 +19,20 @@
 
     <!-- Pantalla de juego -->
         <!-- Texto de la acción -->
-        <string name="ActionText">Nombre de la acción</string>
+        <string name="ActionText">Acción</string>
 
-        <string name="PressText">Pulsa</string>
+        <string name="PressText">Presiona</string>
 
         <string name="SwipeText">Desliza</string>
 
-        <string name="RotateText">Rota</string>
+        <string name="HoldText">Mantiene</string>
+
+        <string name="RotateText">Gira</string>
+
+
 
         <!-- Texto del timer-->
-        <string name="TimerText">0</string>
+        <string name="TimerText">Tiempo restante</string>
 
         <!-- Texto de puntajes-->
         <string name="ScoreText">Score: </string>
