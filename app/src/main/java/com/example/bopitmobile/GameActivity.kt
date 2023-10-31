@@ -17,12 +17,15 @@ class GameActivity : AppCompatActivity() {
     lateinit var TimerText : TextView
     lateinit var ActionText : TextView
     lateinit var ScoreText : TextView
+    var GamePause : Boolean = false
     var countDownTimer : CountDownTimer? = null
     val initialTime = 3000
     var score = 0
+
     lateinit var themeSoundPlayer : MediaPlayer
     lateinit var victorySoundPlayer : List<MediaPlayer>
     lateinit var defeatSoundPlayer : MediaPlayer
+
     lateinit var gestureDetector: GestureDetector
 
     private var randomAction : Int = 0
@@ -86,9 +89,11 @@ class GameActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                defeatSoundPlayer.start()
-                GameUpdate()
 
+                if(GamePause == false) {
+                    defeatSoundPlayer.start()
+                    GameUpdate()
+                }
             }
         }
         countDownTimer?.start()
@@ -144,11 +149,13 @@ class GameActivity : AppCompatActivity() {
     }
     override fun onResume() {
         super.onResume()
+        GamePause = false;
         themeSoundPlayer.start()
     }
 
     override fun onPause() {
         super.onPause()
+        GamePause = true
         themeSoundPlayer.pause()
     }
 }
