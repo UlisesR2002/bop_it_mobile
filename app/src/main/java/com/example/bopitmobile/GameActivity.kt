@@ -1,5 +1,6 @@
 package com.example.bopitmobile
 
+import android.content.Context
 import android.media.MediaPlayer
 import android.media.PlaybackParams
 import androidx.appcompat.app.AppCompatActivity
@@ -11,8 +12,12 @@ import android.view.MotionEvent
 import android.view.View
 import java.util.Random
 import android.widget.TextView
-
-class GameActivity : AppCompatActivity() {
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
+import kotlin.math.abs
+class GameActivity : AppCompatActivity(), SensorEventListener {
 
     lateinit var TimerText : TextView
     lateinit var ActionText : TextView
@@ -28,6 +33,11 @@ class GameActivity : AppCompatActivity() {
 
     lateinit var gestureDetector: GestureDetector
 
+    private lateinit var sensorManager: SensorManager
+    private var accelerometer : Sensor? = null
+    private var lastAcceleration : Float = 0f
+    private var shakeThreshold : Float = 0.01f
+
     private var randomAction : Int = 0
     private var playbackParams : PlaybackParams? = null
 
@@ -40,7 +50,7 @@ class GameActivity : AppCompatActivity() {
         themeSoundPlayer.start()
         playbackParams = themeSoundPlayer.playbackParams
 
-        victorySoundPlayer = List(5) {MediaPlayer.create(this, R.raw.gain)}
+        victorySoundPlayer = List(20) {MediaPlayer.create(this, R.raw.gain)}
         defeatSoundPlayer = MediaPlayer.create(this, R.raw.error)
 
         TimerText = findViewById(R.id.TimerText)
@@ -48,6 +58,9 @@ class GameActivity : AppCompatActivity() {
         ScoreText = findViewById(R.id.ScoreText)
 
         gestureDetector = GestureDetector(this, MyGestureListener())
+
+        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
 
         val handler = Handler()
 
@@ -59,7 +72,7 @@ class GameActivity : AppCompatActivity() {
 
     fun GameUpdate(){
         ScoreText.text = getString(R.string.ScoreText) + score.toString()
-        randomAction = Random().nextInt(3)
+        randomAction = Random().nextInt(4)
 
         when (randomAction) {
             0 -> {
@@ -73,7 +86,7 @@ class GameActivity : AppCompatActivity() {
             }
 
             3 -> {
-                ActionText.setText(R.string.RotateText)
+                ActionText.setText(R.string.ShakeText)
             }
 
 
@@ -151,11 +164,44 @@ class GameActivity : AppCompatActivity() {
         super.onResume()
         GamePause = false;
         themeSoundPlayer.start()
+
+        sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL)
     }
 
     override fun onPause() {
         super.onPause()
         GamePause = true
         themeSoundPlayer.pause()
+
+        sensorManager.unregisterListener(this)
+    }
+
+    override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
+
+    }
+
+    override fun onSensorChanged(event: SensorEvent) {
+        if (event?.sensor?.type == Sensor.TYPE_ACCELEROMETER) {
+            val x = event.values[0]
+            val y = event.values[1]
+            val z = event.values[2]
+
+            val acceleration = (abs(x + y + z - lastAcceleration) / event.timestamp) *  Math.pow(10.0, 10.0).toFloat()
+
+            lastAcceleration = x + y + z
+
+
+            println("acceleration : " + acceleration)
+            println("shakeThreshold : " + shakeThreshold)
+
+            if (acceleration > shakeThreshold && randomAction == 3)
+            {
+                println("existo")
+                score += 100
+                val gainsound = victorySoundPlayer.firstOrNull { !it.isPlaying }
+                gainsound?.start()
+                GameUpdate()
+            }
+        }
     }
 }
