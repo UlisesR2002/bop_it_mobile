@@ -5,40 +5,40 @@
     <string name="app_description">Bop It Mobile, Desarrollado por Ulises Muñoz\n\nAplicación que simula el juguete de Bop It, pero usando funcionalidades de dispositivos móviles.</string>
 
     <!-- Pantalla de inicio -->
-        <!-- Botón Información -->
-        <string name="PlayTextButton">Jugar</string>
+    <!-- Botón Información -->
+    <string name="PlayTextButton">Jugar</string>
 
-        <!-- Botón Información -->
-        <string name="AboutTextButton">Información</string>
+    <!-- Botón Información -->
+    <string name="AboutTextButton">Información</string>
 
-        <!-- Botón Preferencias -->
-        <string name="SettingTextButton">Preferencias</string>
+    <!-- Botón Preferencias -->
+    <string name="SettingTextButton">Preferencias</string>
 
-        <!-- Botón Volver al Menu -->
-        <string name="BackToMenuTextButton">Volver</string>
+    <!-- Botón Volver al Menu -->
+    <string name="BackToMenuTextButton">Volver</string>
 
     <!-- Pantalla de juego -->
-        <!-- Texto de la acción -->
-        <string name="ActionText">Acción</string>
+    <!-- Texto de la acción -->
+    <string name="ActionText">Acción</string>
 
-        <string name="PressText">Presiona</string>
+    <string name="PressText">Presiona</string>
 
-        <string name="SwipeText">Desliza</string>
+    <string name="SwipeText">Desliza</string>
 
-        <string name="HoldText">Mantiene</string>
+    <string name="HoldText">Mantiene</string>
 
-        <string name="ShakeText">Agita</string>
-
-
-
-        <!-- Texto del timer-->
-        <string name="TimerText">Tiempo restante</string>
-
-        <!-- Texto de puntajes-->
-        <string name="ScoreText">Score: </string>
-        <string name="HighScoreText">HighScore: </string>
+    <string name="ShakeText">Agita</string>
 
 
+    <!-- Texto del timer-->
+    <string name="TimerText">Tiempo restante</string>
+
+    <!-- Texto de puntajes-->
+    <string name="ScoreText">Score: </string>
+    <string name="HighScoreText">HighScore: </string>
+
+    <!-- Texto de fin de juego-->
+    <string name="GameOverText">Fin de la partida </string>
 
     <string name="SettingsTitle">Configuraciones</string>
     <string name="title_activity_preferences">PreferencesActivity</string>
@@ -51,7 +51,7 @@
     <!-- User Preferences -->
     <string name="username_title">Nombre Usuario</string>
     <string name="highscore_title">HighScore</string>
-    <string name="HighScore">0</string>
+    <string name="HighScore">100</string>
 
     <!-- Game Preferences -->
     <string name="theme_title">Tema de la aplicación</string>

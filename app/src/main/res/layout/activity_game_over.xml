@@ -2,11 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/GameView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/DarkRed"
-    tools:context=".GameActivity">
+    tools:context=".GameOverActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -30,7 +29,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="6dp"
         android:layout_marginEnd="50dp"
-        android:text="@string/ActionText"
+        android:text="@string/GameOverText"
         android:textColor="@color/white"
         android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,38 +43,47 @@
         android:layout_marginStart="196dp"
         android:layout_marginTop="21dp"
         android:layout_marginEnd="196dp"
-        android:text="@string/TimerText"
+        android:text="@string/ScoreText"
         android:textColor="@color/white"
-        android:textSize="48sp"
+        android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/GameOverText" />
 
     <TextView
-        android:id="@+id/ScoreText"
+        android:id="@+id/HighScoreTextGameOver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="189dp"
-        android:text="@string/ScoreText"
+        android:layout_marginStart="196dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="196dp"
+        android:text="@string/HighScoreText"
         android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/HighScoreText"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ScoreTextGameOver" />
 
-    <TextView
-        android:id="@+id/HighScoreText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="20dp"
-        android:text="@string/HighScoreText"
+    <Button
+        android:id="@+id/ToMenuButton"
+        android:layout_width="250dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="38dp"
+        android:text="@string/BackToMenuTextButton"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textColorHighlight="@color/DarkRed"
+        android:textColorHint="@color/DarkRed"
+        android:textColorLink="@color/DarkRed"
+        android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ScoreText" />
+        app:layout_constraintTop_toBottomOf="@+id/textAbout"
+        tools:ignore="UnknownIdInLayout,TextSizeCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

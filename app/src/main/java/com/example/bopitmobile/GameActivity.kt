@@ -1,31 +1,39 @@
 package com.example.bopitmobile
 
 import android.content.Context
+import android.content.Intent
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.media.MediaPlayer
 import android.media.PlaybackParams
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
 import android.view.GestureDetector
 import android.view.MotionEvent
-import android.view.View
-import java.util.Random
 import android.widget.TextView
-import android.hardware.Sensor
-import android.hardware.SensorEvent
-import android.hardware.SensorEventListener
-import android.hardware.SensorManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
+import java.util.Random
 import kotlin.math.abs
+
+
 class GameActivity : AppCompatActivity(), SensorEventListener {
 
     lateinit var TimerText : TextView
     lateinit var ActionText : TextView
     lateinit var ScoreText : TextView
+    lateinit var HighScore : TextView
+
     var GamePause : Boolean = false
     var countDownTimer : CountDownTimer? = null
     val initialTime = 3000
+
     var score = 0
+    var highscore : String = ""
+
 
     lateinit var themeSoundPlayer : MediaPlayer
     lateinit var victorySoundPlayer : List<MediaPlayer>
@@ -37,6 +45,7 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
     private var accelerometer : Sensor? = null
     private var lastAcceleration : Float = 0f
     private var shakeThreshold : Float = 0.01f
+    private var lastUpdate: Long = 0
 
     private var randomAction : Int = 0
     private var playbackParams : PlaybackParams? = null
@@ -50,12 +59,17 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
         themeSoundPlayer.start()
         playbackParams = themeSoundPlayer.playbackParams
 
-        victorySoundPlayer = List(20) {MediaPlayer.create(this, R.raw.gain)}
+        victorySoundPlayer = List(5) {MediaPlayer.create(this, R.raw.gain)}
         defeatSoundPlayer = MediaPlayer.create(this, R.raw.error)
 
-        TimerText = findViewById(R.id.TimerText)
-        ActionText = findViewById(R.id.ActionText)
+        TimerText = findViewById(R.id.ScoreTextGameOver)
+        ActionText = findViewById(R.id.GameOverText)
         ScoreText = findViewById(R.id.ScoreText)
+        HighScore = findViewById(R.id.HighScoreText)
+
+
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        //highscore = sharedPreferences.getString("HighScore", R.string.HighScore)!!
 
         gestureDetector = GestureDetector(this, MyGestureListener())
 
@@ -67,11 +81,17 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
         handler.postDelayed({
         GameUpdate()
         },500)
-
     }
 
+    fun GameOver(){
+        defeatSoundPlayer.start()
+        val intentGameOver = Intent(this, GameOverActivity::class.java)
+        intentGameOver.putExtra("score", score)
+        startActivity(intentGameOver)
+    }
     fun GameUpdate(){
         ScoreText.text = getString(R.string.ScoreText) + score.toString()
+        //HighScore.text = getString(R.string.HighScoreText) + highscore
         randomAction = Random().nextInt(4)
 
         when (randomAction) {
@@ -104,8 +124,8 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
             override fun onFinish() {
 
                 if(GamePause == false) {
-                    defeatSoundPlayer.start()
-                    GameUpdate()
+                    //GameUpdate()
+                    GameOver()
                 }
             }
         }
@@ -119,12 +139,14 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
     }
     private inner class MyGestureListener : GestureDetector.SimpleOnGestureListener()
     {
-        override fun onDown(e: MotionEvent): Boolean{
+        override fun onSingleTapUp(e: MotionEvent): Boolean{
             if(randomAction == 0) {
                 score += 100
                 val gainsound = victorySoundPlayer.firstOrNull { !it.isPlaying }
                 gainsound?.start()
                 GameUpdate()
+            }else{
+                GameOver()
             }
             println("Press")
             return  true
@@ -141,6 +163,8 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
                 val gainsound = victorySoundPlayer.firstOrNull { !it.isPlaying }
                 gainsound?.start()
                 GameUpdate()
+            }else{
+                GameOver()
             }
             println("Swipe")
             return true
@@ -153,6 +177,8 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
                 val gainsound = victorySoundPlayer.firstOrNull { !it.isPlaying }
                 gainsound?.start()
                 GameUpdate()
+            }else{
+                GameOver()
             }
             println("Hold")
         }
@@ -176,31 +202,39 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
         sensorManager.unregisterListener(this)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        themeSoundPlayer.release()
+        defeatSoundPlayer.release()
+
+    }
+
     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
 
     }
 
     override fun onSensorChanged(event: SensorEvent) {
         if (event?.sensor?.type == Sensor.TYPE_ACCELEROMETER) {
-            val x = event.values[0]
-            val y = event.values[1]
-            val z = event.values[2]
+            val currentTime = System.currentTimeMillis()
+            if(currentTime - lastUpdate > 100) {
+                val x = event.values[0]
+                val y = event.values[1]
+                val z = event.values[2]
 
-            val acceleration = (abs(x + y + z - lastAcceleration) / event.timestamp) *  Math.pow(10.0, 10.0).toFloat()
+                val acceleration = abs(x + y + z - lastAcceleration) / (currentTime - lastUpdate)
 
-            lastAcceleration = x + y + z
-
-
-            println("acceleration : " + acceleration)
-            println("shakeThreshold : " + shakeThreshold)
-
-            if (acceleration > shakeThreshold && randomAction == 3)
-            {
-                println("existo")
-                score += 100
-                val gainsound = victorySoundPlayer.firstOrNull { !it.isPlaying }
-                gainsound?.start()
-                GameUpdate()
+                if (acceleration > shakeThreshold) {
+                    if (randomAction == 3) {
+                        score += 100
+                        val gainsound = victorySoundPlayer.firstOrNull { !it.isPlaying }
+                        gainsound?.start()
+                        GameUpdate()
+                    } else {
+                        GameOver()
+                    }
+                }
+                lastUpdate = currentTime
+                lastAcceleration = x + y + z
             }
         }
     }
