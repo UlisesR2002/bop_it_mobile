@@ -4,7 +4,7 @@
     <PreferenceCategory app:title="@string/UserPreference_header">
 
         <EditTextPreference
-            app:key="Usename"
+            app:key="Username"
             app:title="@string/username_title"
             app:useSimpleSummaryProvider="true" />
 
@@ -33,6 +33,16 @@
             app:entries="@array/dificulty_entreis"
             app:entryValues="@array/dificulty_values"
             app:key="dificulty" />
+
+        <ListPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="10"
+            android:title="@string/dificulty2_title"
+            app:entries="@array/dificulty2_entreis"
+            app:entryValues="@array/dificulty2_values"
+            app:key="dificulty2" />
+
 
         <ListPreference
             android:layout_width="wrap_content"

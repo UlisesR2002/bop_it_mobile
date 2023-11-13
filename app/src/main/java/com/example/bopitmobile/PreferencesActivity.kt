@@ -43,13 +43,20 @@ class PreferencesActivity : AppCompatActivity() {
             editor.putString("HighScore", "0")
             editor.putString("HighScoreSolitary", "0")
             editor.putString("dificulty", "7000")
+            editor.putString("dificulty2", "10")
             editor.putString("theme", "DarkRed")
             editor.putString("volume", "50")
 
             editor.apply()
 
+            findPreference<EditTextPreference>("Username")?.text = ""
             findPreference<EditTextPreference>("HighScore")?.text = "0"
             findPreference<EditTextPreference>("HighScoreSolitary")?.text = "0"
+
+            findPreference<ListPreference>("dificulty")?.value = "7000"
+            findPreference<ListPreference>("dificulty2")?.value = "10"
+            findPreference<ListPreference>("theme")?.value = "DarkRed"
+            findPreference<ListPreference>("volume")?.value = "50"
         }
     }
 }

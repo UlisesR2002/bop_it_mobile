@@ -59,6 +59,7 @@
 
     <!-- Game Preferences -->
     <string name="dificulty_title">Dificultad de la aplicación</string>
+    <string name="dificulty2_title">Numero de aciertos por nivel</string>
     <string name="theme_title">Tema de la aplicación</string>
     <string name="volume_title">Nivel de volumen de la aplicación</string>
 

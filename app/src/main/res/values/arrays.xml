@@ -19,9 +19,21 @@
     </string-array>
 
     <string-array name="dificulty_values">
+        <item>9000</item>
         <item>7000</item>
         <item>5000</item>
-        <item>3000</item>
+    </string-array>
+
+    <string-array name="dificulty2_entreis">
+        <item>5 Aciertos</item>
+        <item>10 Aciertos</item>
+        <item>15 Aciertos</item>
+    </string-array>
+
+    <string-array name="dificulty2_values">
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
     </string-array>
 
 

@@ -31,8 +31,8 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
 
     var GamePause : Boolean = false
     var countDownTimer : CountDownTimer? = null
-    var initialTime : Int = 6000
-    var dificulty : Int = 1
+    var initialTime : Int = 7000
+    var correctActionInRow = 0
 
     var score = 0
     var HighScoreValue : String = ""
@@ -52,6 +52,7 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
 
     private var randomAction : Int = 0
     private var playbackParams : PlaybackParams? = null
+    private var speed : Float = 1.0f
 
 
 
@@ -61,8 +62,13 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
 
         themeSoundPlayer = MediaPlayer.create(this, R.raw.theme)
         themeSoundPlayer.isLooping = true
-        themeSoundPlayer.start()
+
+
         playbackParams = themeSoundPlayer.playbackParams
+        playbackParams?.speed = speed
+
+        themeSoundPlayer.playbackParams = playbackParams as PlaybackParams
+        themeSoundPlayer.start()
 
         victorySoundPlayer = List(5) {MediaPlayer.create(this, R.raw.gain)}
         defeatSoundPlayer = MediaPlayer.create(this, R.raw.error)
@@ -75,6 +81,27 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
 
         val preferences = PreferenceManager.getDefaultSharedPreferences(this)
         HighScoreValue = preferences.getString("HighScoreSolitary", "0") ?: "0"
+        initialTime = (preferences.getString("dificulty", "7000")?: "7000").toInt()
+
+        when (initialTime)
+        {
+            9000 -> {
+                speed = 0.8f
+                ChangeSpeedMusic(speed)
+            }
+
+            7000 -> {
+                speed = 1.0f
+                ChangeSpeedMusic(speed)
+            }
+
+            5000 -> {
+                speed = 1.2f
+                ChangeSpeedMusic(speed)
+            }
+        }
+
+
         HighScore.text = getString(R.string.HighScoreText) + HighScoreValue
 
 
@@ -98,12 +125,12 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
         startActivity(intentGameOver)
     }
     fun GameUpdate(){
-
+        println(correctActionInRow)
         SetScoreText()
 
         ChangeDificulty()
 
-        randomAction = Random().nextInt(1)
+        randomAction = Random().nextInt(4)
 
         when (randomAction) {
             0 -> {
@@ -162,20 +189,23 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
 
     fun ChangeDificulty()
     {
-        if (score > 1000) {
-            dificulty = score / 1000
+        val preferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val SpeedUpAction = (preferences.getString("dificulty2", "10")?: "10").toInt()
+
+        if(SpeedUpAction == correctActionInRow && initialTime >= 4000)
+        {
+            correctActionInRow = 0
+            speed += 0.1f
+            ChangeSpeedMusic(speed)
+            initialTime -= 1000
         }
-        when (dificulty) {
-            1 -> {
-                initialTime = 5000
-            }
-            2 -> {
-                initialTime = 4000
-            }
-            3 -> {
-                initialTime = 3000
-            }
-        }
+    }
+
+    private fun ChangeSpeedMusic(nuevaVelocidad: Float) {
+
+        playbackParams?.speed = nuevaVelocidad
+        themeSoundPlayer.playbackParams = playbackParams!!
+
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -186,6 +216,7 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
     {
         override fun onSingleTapUp(e: MotionEvent): Boolean{
             if(randomAction == 0) {
+                correctActionInRow++
                 score += 100
                 val gainsound = victorySoundPlayer.firstOrNull { !it.isPlaying }
                 gainsound?.start()
@@ -193,7 +224,6 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
             }else{
                 GameOver()
             }
-            println("Press")
             return  true
         }
 
@@ -204,6 +234,7 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
             velocityY: Float
         ): Boolean {
             if(randomAction == 1) {
+                correctActionInRow++
                 score += 100
                 val gainsound = victorySoundPlayer.firstOrNull { !it.isPlaying }
                 gainsound?.start()
@@ -211,13 +242,13 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
             }else{
                 GameOver()
             }
-            println("Swipe")
             return true
         }
 
         override fun onLongPress(e: MotionEvent) {
             if(randomAction == 2)
             {
+                correctActionInRow++
                 score += 100
                 val gainsound = victorySoundPlayer.firstOrNull { !it.isPlaying }
                 gainsound?.start()
@@ -225,7 +256,6 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
             }else{
                 GameOver()
             }
-            println("Hold")
         }
 
 
@@ -270,6 +300,7 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
 
                 if (acceleration > shakeThreshold) {
                     if (randomAction == 3) {
+                        correctActionInRow++
                         score += 100
                         val gainsound = victorySoundPlayer.firstOrNull { !it.isPlaying }
                         gainsound?.start()
