@@ -2,6 +2,7 @@ package com.example.bopitmobile
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -15,6 +16,7 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.EditTextPreference
 import androidx.preference.PreferenceManager
 import java.util.Random
 import kotlin.math.abs
@@ -29,11 +31,12 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
 
     var GamePause : Boolean = false
     var countDownTimer : CountDownTimer? = null
-    val initialTime = 3000
+    var initialTime : Int = 6000
+    var dificulty : Int = 1
 
     var score = 0
-    var highscore : String = ""
-
+    var HighScoreValue : String = ""
+    var newHighScore : Boolean = false
 
     lateinit var themeSoundPlayer : MediaPlayer
     lateinit var victorySoundPlayer : List<MediaPlayer>
@@ -49,6 +52,8 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
 
     private var randomAction : Int = 0
     private var playbackParams : PlaybackParams? = null
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,8 +73,10 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
         HighScore = findViewById(R.id.HighScoreText)
 
 
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        //highscore = sharedPreferences.getString("HighScore", R.string.HighScore)!!
+        val preferences = PreferenceManager.getDefaultSharedPreferences(this)
+        HighScoreValue = preferences.getString("HighScoreSolitary", "0") ?: "0"
+        HighScore.text = getString(R.string.HighScoreText) + HighScoreValue
+
 
         gestureDetector = GestureDetector(this, MyGestureListener())
 
@@ -83,16 +90,20 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
         },500)
     }
 
-    fun GameOver(){
+    fun GameOver() {
         defeatSoundPlayer.start()
         val intentGameOver = Intent(this, GameOverActivity::class.java)
         intentGameOver.putExtra("score", score)
+        intentGameOver.putExtra("newHighScore" , newHighScore)
         startActivity(intentGameOver)
     }
     fun GameUpdate(){
-        ScoreText.text = getString(R.string.ScoreText) + score.toString()
-        //HighScore.text = getString(R.string.HighScoreText) + highscore
-        randomAction = Random().nextInt(4)
+
+        SetScoreText()
+
+        ChangeDificulty()
+
+        randomAction = Random().nextInt(1)
 
         when (randomAction) {
             0 -> {
@@ -130,7 +141,41 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
             }
         }
         countDownTimer?.start()
+    }
 
+    fun SetScoreText()
+    {
+        val preferences = PreferenceManager.getDefaultSharedPreferences(this)
+
+        if (HighScoreValue.toInt() <= score)
+        {
+            newHighScore = true
+            val editor: SharedPreferences.Editor = preferences.edit()
+            editor.putString("HighScoreSolitary", score.toString())
+            editor.apply()
+        }
+
+        ScoreText.text = getString(R.string.ScoreText) + score.toString()
+        HighScoreValue = preferences.getString("HighScoreSolitary", "0") ?: "0"
+        HighScore.text = getString(R.string.HighScoreText) + HighScoreValue
+    }
+
+    fun ChangeDificulty()
+    {
+        if (score > 1000) {
+            dificulty = score / 1000
+        }
+        when (dificulty) {
+            1 -> {
+                initialTime = 5000
+            }
+            2 -> {
+                initialTime = 4000
+            }
+            3 -> {
+                initialTime = 3000
+            }
+        }
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {

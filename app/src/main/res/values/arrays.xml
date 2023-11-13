@@ -11,16 +11,18 @@
         <item>5000</item>
         <item>7000</item>
     </string-array>
-    <string-array name="reply_entries">
-        <item>Reply</item>
-        <item>Reply to all</item>
+
+    <string-array name="dificulty_entreis">
+        <item>Facil</item>
+        <item>Normal</item>
+        <item>Dificil</item>
     </string-array>
 
-    <string-array name="reply_values">
-        <item>reply</item>
-        <item>reply_all</item>
+    <string-array name="dificulty_values">
+        <item>7000</item>
+        <item>5000</item>
+        <item>3000</item>
     </string-array>
-
 
 
     <string-array name="theme_entreis">
@@ -29,7 +31,7 @@
     </string-array>
 
     <string-array name="theme_values">
-        <item>DarkRead</item>
+        <item>DarkRed</item>
         <item>Black</item>
     </string-array>
 
@@ -50,15 +52,4 @@
         <item>100</item>
     </string-array>
 
-    <string-array name="fontsize_entreis">
-        <item>Pequeño</item>
-        <item>Mediano</item>
-        <item>Grande</item>
-    </string-array>
-
-    <string-array name="fontsize_values">
-        <item>10</item>
-        <item>25</item>
-        <item>50</item>
-    </string-array>
 </resources>

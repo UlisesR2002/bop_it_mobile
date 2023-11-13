@@ -39,6 +39,8 @@
 
     <!-- Texto de fin de juego-->
     <string name="GameOverText">Fin de la partida </string>
+    <string name="NewHighScore">Nuevo HighScore </string>
+
 
     <string name="SettingsTitle">Configuraciones</string>
     <string name="title_activity_preferences">PreferencesActivity</string>
@@ -50,16 +52,19 @@
 
     <!-- User Preferences -->
     <string name="username_title">Nombre Usuario</string>
+    <string name="highscore_solitary_title">Solitary HighScore</string>
     <string name="highscore_title">HighScore</string>
-    <string name="HighScore">100</string>
+    <string name="HighScore_solitary_value">0</string>
+    <string name="HighScore_value">0</string>
 
     <!-- Game Preferences -->
+    <string name="dificulty_title">Dificultad de la aplicación</string>
     <string name="theme_title">Tema de la aplicación</string>
     <string name="volume_title">Nivel de volumen de la aplicación</string>
-    <string name="fontsize_title">Tamaño de letra</string>
 
     <!-- Administration Preference -->
     <string name="restart_preference">Reiniciar preferencias</string>
+    <string name="restart_preference_body">Restablecer todas las preferencias a sus valores predeterminados</string>
 
     <!-- Sync Preferences -->
     <string name="sync_title">Sync email periodically</string>

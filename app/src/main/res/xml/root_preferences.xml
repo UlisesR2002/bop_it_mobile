@@ -9,10 +9,17 @@
             app:useSimpleSummaryProvider="true" />
 
         <EditTextPreference
-            app:defaultValue="@string/HighScore"
+            app:defaultValue="0"
             app:key="HighScore"
             app:selectable="false"
             app:title="@string/highscore_title"
+            app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+            app:defaultValue="0"
+            app:key="HighScoreSolitary"
+            app:selectable="false"
+            app:title="@string/highscore_solitary_title"
             app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>
@@ -21,7 +28,16 @@
         <ListPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:defaultValue="1"
+            android:defaultValue="7000"
+            android:title="@string/dificulty_title"
+            app:entries="@array/dificulty_entreis"
+            app:entryValues="@array/dificulty_values"
+            app:key="dificulty" />
+
+        <ListPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="DarkRed"
             android:title="@string/theme_title"
             app:entries="@array/theme_entreis"
             app:entryValues="@array/theme_values"
@@ -29,30 +45,23 @@
         <ListPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:defaultValue="1"
+            android:defaultValue="50"
             android:title="@string/volume_title"
             app:entries="@array/volume_entreis"
             app:entryValues="@array/volume_values"
             app:key="volume" />
-        <ListPreference
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:defaultValue="1"
-            android:title="@string/fontsize_title"
-            app:entries="@array/fontsize_entreis"
-            app:entryValues="@array/fontsize_values"
-            app:key="fontsize" />
     </PreferenceCategory>
     <PreferenceCategory
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:title="@string/Administration_header">
 
-        <SwitchPreference
+        <Preference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:defaultValue="false"
-            android:title="@string/restart_preference" />
+            android:key="reset_key"
+            android:title="@string/restart_preference"
+            android:summary="@string/restart_preference_body" />
     </PreferenceCategory>
 
 </PreferenceScreen>
