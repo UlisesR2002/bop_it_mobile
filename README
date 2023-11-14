@@ -16,6 +16,9 @@ Laboratorio 2 (30/10/2023)
 Laboratorio 3 (3/11/2023)
     -SE IMPLEMENTO LA PANTALLA DE FIN DE JUEGO
     -SE MODIFICO EL CICLO DE JUEGO, DANDOLE UN FIN DE JUEGO Y AGREGANDO UNA NUEVA INSTRUCCION DE JUEGO (ACELEROMETRO)
+Laboratorio 4 (13/11/2023)
+    -SE MODIFICARON LAS PREFERENCIAS, AHORA OCUPANDOSE PARA LA DIFICULTAD Y PUNTACION DEL JUEGO
+    -EL JUEGO AHORA SE ACELERA (LA MUSICA SE ACELERA Y EL TIEMPO DE REACCION EN DISMINUIDO) CUANDO SE LLEGA ACIERTO NUMEROS DE ACIERTOS
 
 ENLACE AL APK (Laboratorio 2)
     https://drive.google.com/file/d/1riS5aKc1K6lNO-HLirCFzsEbHBh7y9_e/view
@@ -29,6 +32,11 @@ ENLACE AL APK (Laboratorio 3)
 ENLACE A LA DEMOSTRACION (Laboratorio 3)
     https://www.youtube.com/watch?v=23QzQzxa8kc
 
+ENLACE AL APK (Laboratorio 4)
+    https://drive.google.com/file/d/1yTcSVQL15FStebi7qM8jbyc0BASNiLRy/view
+
+ENLACE A LA DEMOSTRACION (Laboratorio 4)
+    https://www.youtube.com/watch?v=kXVMup8P_Ek
 
 ENLACE AL GITHUB
     https://github.com/UlisesR2002/bop_it_mobile
